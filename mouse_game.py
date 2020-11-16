@@ -31,12 +31,29 @@ class MouseGame:
                 if event.type == pygame.QUIT:
                     sys.exit()
                 elif event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_RIGHT:
-                        # Move cat to the right
-                        self.cat.moving_right = True
+                    self._check_keydown_events(event)
                 elif event.type == pygame.KEYUP:
-                    if event.key == pygame.K_RIGHT:
-                        self.cat.moving_right = False
+                    self._check_keyup_events(event)
+
+    def _check_keydown_events(self, event):
+        if event.key == pygame.K_RIGHT:
+            self.cat.moving_right = True
+        elif event.key == pygame.K_LEFT:
+            self.cat.moving_left = True
+        if event.key == pygame.K_UP:
+            self.cat.moving_up = True
+        elif event.key == pygame.K_DOWN:
+            self.cat.moving_down = True
+
+    def _check_keyup_events(self, event):
+        if event.key == pygame.K_RIGHT:
+            self.cat.moving_right = False
+        elif event.key == pygame.K_LEFT:
+            self.cat.moving_left = False
+        if event.key == pygame.K_UP:
+            self.cat.moving_up = False
+        elif event.key == pygame.K_DOWN:
+            self.cat.moving_down = False
     
     def _update_screen(self):
          # Redraw the screen during each pass through the loop

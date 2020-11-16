@@ -7,3 +7,6 @@ class Settings:
         self.screen_width = 1200
         self.screen_height = 800
         self.bg_color = (121, 164, 182)
+
+        # Cat settings
+        self.cat_speed = 1.5
