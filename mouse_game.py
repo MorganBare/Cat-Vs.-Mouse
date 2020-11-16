@@ -13,7 +13,9 @@ class MouseGame:
         pygame.init()
         self.settings = Settings()
 
-        self.screen = pygame.display.set_mode((self.settings.screen_width, self.settings.screen_height))
+        self.screen = pygame.display.set_mode((0,0), pygame.FULLSCREEN)
+        self.settings.screen_width = self.screen.get_rect().width
+        self.settings.screen_height = self.screen.get_rect().height 
         pygame.display.set_caption("Macka Mouse Game")
 
         self.cat = Cat(self)
@@ -44,6 +46,8 @@ class MouseGame:
             self.cat.moving_up = True
         elif event.key == pygame.K_DOWN:
             self.cat.moving_down = True
+        if event.key == pygame.K_q:
+            sys.exit()
 
     def _check_keyup_events(self, event):
         if event.key == pygame.K_RIGHT:
