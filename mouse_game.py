@@ -27,7 +27,7 @@ class MouseGame:
         while True:
             self._check_events()
             self.cat.update()
-            self.cheeses.update() 
+            self._update_cheese()
             self._update_screen()
 
     def _check_events(self):
@@ -66,8 +66,20 @@ class MouseGame:
 
     def _fire_cheese_(self):
         """Create a new cheese and add it to the cheese group"""
-        new_cheese = Cheese(self)
-        self.cheeses.add(new_cheese)
+        if len(self.cheeses) < self.settings.cheese_allowed:
+            new_cheese = Cheese(self)
+            self.cheeses.add(new_cheese)
+
+    def _update_cheese(self):
+        """Update the position of the cheese and get rid of old cheese"""
+        # Update cheese positions
+        self.cheeses.update()
+
+        # Get rid of old cheese
+        for cheese in self.cheeses.copy():
+            if cheese.rect.bottom <= 0:
+                self.cheeses.remove(cheese)
+
     
     def _update_screen(self):
          # Redraw the screen during each pass through the loop

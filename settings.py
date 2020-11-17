@@ -15,5 +15,5 @@ class Settings:
         self.cheese_speed = 1.0
         self.cheese_width = 3
         self.cheese_height = 15
-        self.cheese_color = (255, 255, 255)
+        self.cheese_allowed = 6
        
