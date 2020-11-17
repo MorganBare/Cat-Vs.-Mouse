@@ -5,6 +5,7 @@ import pygame
 
 from settings import Settings
 from cat import Cat
+from cheese import Cheese 
 
 class MouseGame:
     """Overall class to manage game assets and behavior"""
@@ -19,12 +20,14 @@ class MouseGame:
         pygame.display.set_caption("Macka Mouse Game")
 
         self.cat = Cat(self)
+        self.cheeses = pygame.sprite.Group() 
 
     def run_game(self):
         """Start the main loop for the game"""
         while True:
             self._check_events()
             self.cat.update()
+            self.cheeses.update() 
             self._update_screen()
 
     def _check_events(self):
@@ -48,6 +51,8 @@ class MouseGame:
             self.cat.moving_down = True
         if event.key == pygame.K_q:
             sys.exit()
+        elif event.key == pygame.K_SPACE:
+            self._fire_cheese_()
 
     def _check_keyup_events(self, event):
         if event.key == pygame.K_RIGHT:
@@ -58,11 +63,18 @@ class MouseGame:
             self.cat.moving_up = False
         elif event.key == pygame.K_DOWN:
             self.cat.moving_down = False
+
+    def _fire_cheese_(self):
+        """Create a new cheese and add it to the cheese group"""
+        new_cheese = Cheese(self)
+        self.cheeses.add(new_cheese)
     
     def _update_screen(self):
          # Redraw the screen during each pass through the loop
         self.screen.fill(self.settings.bg_color)
         self.cat.blitme()
+        for cheese in self.cheeses.sprites():
+            cheese.draw_cheese()
         # Make the most recently drawn screen visible
         pygame.display.flip()
 

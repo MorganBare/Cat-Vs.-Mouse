@@ -7,7 +7,7 @@ class Cheese(Sprite):
     def __init__(self, mg_game):
         """Create a cheese object at cat's current position"""
         super().__init__()
-        self.screen = mg.screen
+        self.screen = mg_game.screen
         self.settings = mg_game.settings 
         self.color = self.settings.cheese_color
 
@@ -18,3 +18,13 @@ class Cheese(Sprite):
         # Store cheese position as a decimal value
         self.y = float(self.rect.y)
 
+    def update(self):
+        """Move the cheese up the screen"""
+        # Update decimal point of the cheese
+        self.y -= self.settings.cheese_speed
+        # Update the rect position
+        self.rect.y = self.y
+    
+    def draw_cheese(self):
+        """Draw the cheese to the screen"""
+        pygame.draw.rect(self.screen, self.color, self.rect) 
