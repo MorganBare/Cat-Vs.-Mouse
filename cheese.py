@@ -12,7 +12,7 @@ class Cheese(Sprite):
         self.settings = mg_game.settings 
 
         # Load cheese image and get it's rect
-        self.image = pygame.image.load('mouse_game/images/cheese.png').convert()
+        self.image = pygame.image.load('mouse_game/image/cheese.png').convert()
         self.rect = self.image.get_rect()
 
         # Create a cheese rect at (0,0) and then set correct position

@@ -6,6 +6,7 @@ import pygame
 from settings import Settings
 from cat import Cat
 from cheese import Cheese 
+from mouse import Mouse
 
 class MouseGame:
     """Overall class to manage game assets and behavior"""
@@ -21,6 +22,9 @@ class MouseGame:
 
         self.cat = Cat(self)
         self.cheeses = pygame.sprite.Group() 
+        self.mice = pygame.sprite.Group()
+
+        self._create_pack()
 
     def run_game(self):
         """Start the main loop for the game"""
@@ -70,6 +74,12 @@ class MouseGame:
             new_cheese = Cheese(self)
             self.cheeses.add(new_cheese)
 
+    def _create_pack(self):
+        """Create a pack of mice"""
+        # Make a mouse
+        mouse = Mouse(self)
+        self.mice.add(mouse)
+
     def _update_cheese(self):
         """Update the position of the cheese and get rid of old cheese"""
         # Update cheese positions
@@ -87,6 +97,7 @@ class MouseGame:
         self.cat.blitme()
         for cheese in self.cheeses.sprites():
             cheese.blt_cheese()
+        self.mice.draw(self.screen)
         # Make the most recently drawn screen visible
         pygame.display.flip()
 
