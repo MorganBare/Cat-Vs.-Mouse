@@ -76,9 +76,21 @@ class MouseGame:
 
     def _create_pack(self):
         """Create a pack of mice"""
-        # Make a mouse
+        #Create a mouse and find the number of mice in a row
+        #Spacing between each mouse is equal to one mouse width
         mouse = Mouse(self)
-        self.mice.add(mouse)
+        mouse_width = mouse.rect.width 
+        available_space_x = self.settings.screen_width - (2* mouse_width)
+        number_mice_x = available_space_x // (2 * mouse_width)
+
+        # Create the first row of mice
+        for mouse_number in range(number_mice_x):
+            # Create a mouse and place it in the row
+            mouse = Mouse(self)
+            mouse.x = mouse_width + 2 * mouse_width * mouse_number
+            mouse.rect.x = mouse.x
+            self.mice.add(mouse)
+
 
     def _update_cheese(self):
         """Update the position of the cheese and get rid of old cheese"""
