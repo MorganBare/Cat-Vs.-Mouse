@@ -74,7 +74,7 @@ class MouseGame:
         self.screen.fill(self.settings.bg_color)
         self.cat.blitme()
         for cheese in self.cheeses.sprites():
-            cheese.draw_cheese()
+            cheese.blt_cheese()
         # Make the most recently drawn screen visible
         pygame.display.flip()
 

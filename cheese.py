@@ -1,5 +1,6 @@
 import pygame
 from pygame.sprite import Sprite
+from pygame.locals import RLEACCEL
 
 class Cheese(Sprite):
     """A class to manage the cheese fired from the cat"""
@@ -9,10 +10,15 @@ class Cheese(Sprite):
         super().__init__()
         self.screen = mg_game.screen
         self.settings = mg_game.settings 
-        self.color = self.settings.cheese_color
+        #self.color = self.settings.cheese_color
+
+        # Load cheese image and get it's rect
+        self.image = pygame.image.load('mouse_game/images/cheese.png').convert()
+        #self.color = self.image.set_colorkey((255, 255, 255), RLEACCEL)
+        self.rect = self.image.get_rect()
 
         # Create a cheese rect at (0,0) and then set correct position
-        self.rect = pygame.Rect(0, 0, self.settings.cheese_width, self.settings.cheese_height)
+        #self.rect = pygame.Rect(0, 0, self.settings.cheese_width, self.settings.cheese_height)
         self.rect.midtop = mg_game.cat.rect.midtop
 
         # Store cheese position as a decimal value
@@ -25,6 +31,10 @@ class Cheese(Sprite):
         # Update the rect position
         self.rect.y = self.y
     
-    def draw_cheese(self):
-        """Draw the cheese to the screen"""
-        pygame.draw.rect(self.screen, self.color, self.rect) 
+    #def draw_cheese(self):
+        #"""Draw the cheese to the screen"""
+       # pygame.draw.rect(self.screen, self.color, self.rect) 
+
+    def blt_cheese(self):
+        """Draw the cheese at its current location"""
+        self.screen.blit(self.image, self.rect)
