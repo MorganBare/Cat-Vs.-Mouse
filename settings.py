@@ -19,4 +19,7 @@ class Settings:
 
         # Mouse settings
         self.mouse_speed = 1.0
+        self.mouse_drop_speed = 10
+        # mouse direction of 1 reprsents right; -1 represents left
+        self.mouse_direction = 1
        

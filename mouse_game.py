@@ -112,11 +112,27 @@ class MouseGame:
         for cheese in self.cheeses.copy():
             if cheese.rect.bottom <= 0:
                 self.cheeses.remove(cheese)
+
+        #Check for any cheese that has hit mice and get rid of the mice
+        collisions = pygame.sprite.groupcollide( self.cheeses, self.mice, True, True)
     
     def _update_mouse(self):
         """Update the positions of all the mice in the pack"""
+        self._check_pack_edges()
         self.mice.update()
 
+    def _check_pack_edges(self):
+        """Respond if any mice touch the edges"""
+        for mouse in self.mice.sprites():
+            if mouse.check_edges():
+                self._change_pack_direction()
+                break
+    
+    def _change_pack_direction(self):
+        """Drop the pack and change direction"""
+        for mouse in self.mice.sprites():
+            mouse.rect.y += self.settings.mouse_drop_speed
+        self.settings.mouse_direction *= -1
     
     def _update_screen(self):
          # Redraw the screen during each pass through the loop
