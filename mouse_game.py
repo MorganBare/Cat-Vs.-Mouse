@@ -32,6 +32,7 @@ class MouseGame:
             self._check_events()
             self.cat.update()
             self._update_cheese()
+            self._update_mouse()
             self._update_screen()
 
     def _check_events(self):
@@ -111,6 +112,10 @@ class MouseGame:
         for cheese in self.cheeses.copy():
             if cheese.rect.bottom <= 0:
                 self.cheeses.remove(cheese)
+    
+    def _update_mouse(self):
+        """Update the positions of all the mice in the pack"""
+        self.mice.update()
 
     
     def _update_screen(self):

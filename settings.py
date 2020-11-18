@@ -16,4 +16,7 @@ class Settings:
         self.cheese_width = 3
         self.cheese_height = 15
         self.cheese_allowed = 6
+
+        # Mouse settings
+        self.mouse_speed = 1.0
        

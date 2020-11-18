@@ -8,6 +8,7 @@ class Mouse(Sprite):
         # Initialize the mouse and set it's starting position
         super().__init__()
         self.screen = mg_game.screen
+        self.settings = mg_game.settings
 
         # Load the mouse image and set its rect attribute
         self.image = pygame.image.load('mouse_game/image/mouse.png')
@@ -19,3 +20,8 @@ class Mouse(Sprite):
 
         # Stoe the mouse's exact horizontal position
         self.x = float(self.rect.x)
+
+    def update(self):
+        """Move mice to the right"""
+        self.x += self.settings.mouse_speed
+        self.rect.x = self.x
