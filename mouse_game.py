@@ -79,18 +79,28 @@ class MouseGame:
         #Create a mouse and find the number of mice in a row
         #Spacing between each mouse is equal to one mouse width
         mouse = Mouse(self)
-        mouse_width = mouse.rect.width 
+        mouse_width, mouse_height = mouse.rect.size 
         available_space_x = self.settings.screen_width - (2* mouse_width)
         number_mice_x = available_space_x // (2 * mouse_width)
 
-        # Create the first row of mice
-        for mouse_number in range(number_mice_x):
-            # Create a mouse and place it in the row
-            mouse = Mouse(self)
-            mouse.x = mouse_width + 2 * mouse_width * mouse_number
-            mouse.rect.x = mouse.x
-            self.mice.add(mouse)
+        # Determine the number of mice that can fit on the screen
+        cat_height = self.cat.rect.height 
+        available_space_y = (self.settings.screen_height - (3 * mouse_height) - cat_height)
+        number_rows = available_space_y // (4 * mouse_height)
 
+        # Create the full pack of mice
+        for row_number in range(number_rows):
+            for mouse_number in range(number_mice_x):
+                self._create_mouse(mouse_number, row_number)
+
+    def _create_mouse(self, mouse_number, row_number):
+        """Create a mouse and put it in the row"""
+        mouse = Mouse(self)
+        mouse_width, mouse_height = mouse.rect.size 
+        mouse.x = mouse_width + 2 * mouse_width * mouse_number
+        mouse.rect.x = mouse.x
+        mouse.rect.y = mouse.rect.height + 2 * mouse.rect.height * row_number 
+        self.mice.add(mouse)
 
     def _update_cheese(self):
         """Update the position of the cheese and get rid of old cheese"""
