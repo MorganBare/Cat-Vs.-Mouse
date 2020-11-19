@@ -12,10 +12,10 @@ class Settings:
         self.cat_speed = 1.5
 
         # Cheese settings
-        self.cheese_speed = 1.0
+        self.cheese_speed = 1.5
         self.cheese_width = 3
         self.cheese_height = 15
-        self.cheese_allowed = 6
+        self.cheese_allowed = 20
 
         # Mouse settings
         self.mouse_speed = 1.0

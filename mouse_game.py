@@ -112,9 +112,17 @@ class MouseGame:
         for cheese in self.cheeses.copy():
             if cheese.rect.bottom <= 0:
                 self.cheeses.remove(cheese)
+        
+        self._check_cheese_mouse_collisions()
 
+    def _check_cheese_mouse_collisions(self):
         #Check for any cheese that has hit mice and get rid of the mice
         collisions = pygame.sprite.groupcollide( self.cheeses, self.mice, True, True)
+
+        if not self.mice:
+            # Destroy existing cheese and create new pack
+            self.cheeses.empty()
+            self._create_pack()
     
     def _update_mouse(self):
         """Update the positions of all the mice in the pack"""
