@@ -138,6 +138,9 @@ class MouseGame:
         if pygame.sprite.spritecollideany(self.cat, self.mice):
             self._cat_hit()
 
+        # Look for mice hitting the bottom of the screen
+        self._check_mice_bottom()
+
     def _cat_hit(self):
         """ Respond to the cat being hit by the mouse """
         # Decrement cats left
@@ -152,8 +155,7 @@ class MouseGame:
         self.cat.center_cat()
 
         # Pause
-        sleep(0.5) 
-            
+        sleep(0.5)            
 
     def _check_pack_edges(self):
         """Respond if any mice touch the edges"""
@@ -168,6 +170,16 @@ class MouseGame:
             mouse.rect.y += self.settings.mouse_drop_speed
         self.settings.mouse_direction *= -1
     
+    def _check_mice_bottom(self):
+        """ Check if any mice make it to the bottom of the screen """
+        screen_rect = self.screen.get_rect()
+        for mouse in self.mice.sprites():
+            if mouse.rect.bottom >= screen_rect.bottom:
+                # Treat this the same as if cat got hit
+                self._cat_hit()
+                break
+
+
     def _update_screen(self):
          # Redraw the screen during each pass through the loop
         self.screen.fill(self.settings.bg_color)
