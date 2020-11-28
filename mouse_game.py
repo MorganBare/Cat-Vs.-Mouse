@@ -1,9 +1,11 @@
 
 import sys
+from time import sleep 
 
 import pygame
 
 from settings import Settings
+from game_stats import GameStats
 from cat import Cat
 from cheese import Cheese 
 from mouse import Mouse
@@ -19,6 +21,9 @@ class MouseGame:
         self.settings.screen_width = self.screen.get_rect().width
         self.settings.screen_height = self.screen.get_rect().height 
         pygame.display.set_caption("Macka Mouse Game")
+
+        # Create an instance to store game statistics
+        self.stats = GameStats(self)
 
         self.cat = Cat(self)
         self.cheeses = pygame.sprite.Group() 
@@ -128,6 +133,27 @@ class MouseGame:
         """Update the positions of all the mice in the pack"""
         self._check_pack_edges()
         self.mice.update()
+
+        # Look for cat-mouse collisions
+        if pygame.sprite.spritecollideany(self.cat, self.mice):
+            self._cat_hit()
+
+    def _cat_hit(self):
+        """ Respond to the cat being hit by the mouse """
+        # Decrement cats left
+        self.stats.cats_left -= 1
+
+        # Get rid of any remaining mice and cheese
+        self.mice.empty()
+        self.cheeses.empty()
+
+        # Create new pack and center cat
+        self._create_pack()
+        self.cat.center_cat()
+
+        # Pause
+        sleep(0.5) 
+            
 
     def _check_pack_edges(self):
         """Respond if any mice touch the edges"""

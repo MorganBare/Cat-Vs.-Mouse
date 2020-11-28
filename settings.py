@@ -10,6 +10,7 @@ class Settings:
 
         # Cat settings
         self.cat_speed = 1.5
+        self.cat_limit = 3
 
         # Cheese settings
         self.cheese_speed = 1.5
