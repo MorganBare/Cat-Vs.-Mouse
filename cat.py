@@ -1,9 +1,11 @@
 import pygame
+from pygame.sprite import Sprite
 
-class Cat:
+class Cat(Sprite):
     """A class to manage the cat"""
     def __init__(self, mg_game):
         """Initialize cat and it's starting position"""
+        super().__init__()
         self.screen = mg_game.screen
         self.settings = mg_game.settings
         self.screen_rect = mg_game.screen.get_rect()

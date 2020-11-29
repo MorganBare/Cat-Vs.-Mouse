@@ -95,6 +95,7 @@ class MouseGame:
             self.stats.game_active = True
             self.sb.prep_score()
             self.sb.prep_level()
+            self.sb.prep_cats()
 
             # Hide the mouse cursor
             pygame.mouse.set_visible(False) 
@@ -190,6 +191,7 @@ class MouseGame:
         if self.stats.cats_left > 0:
             # Decrement cats left
             self.stats.cats_left -= 1
+            self.sb.prep_cats()
 
             # Get rid of any remaining mice and cheese
             self.mice.empty()

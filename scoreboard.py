@@ -1,10 +1,14 @@
 import pygame.font 
+from pygame.sprite import Group 
+
+from cat import Cat 
 
 class Scoreboard:
     # A class to report scoring information
 
     def __init__(self, mg_game):
         # Initialize scorekeeping attributes
+        self.mg_game = mg_game 
         self.screen = mg_game.screen
         self.screen_rect = self.screen.get_rect()
         self.settings = mg_game.settings 
@@ -18,6 +22,7 @@ class Scoreboard:
         self.prep_score()
         self.prep_high_score()
         self.prep_level()
+        self.prep_cats() 
 
     def prep_score(self):
         # Turn the score into a rendered image
@@ -57,8 +62,18 @@ class Scoreboard:
         self.level_rect.right = self.score_rect.right
         self.level_rect.top = self.score_rect.bottom + 10
 
+    def prep_cats(self):
+        # Show how many cats are left
+        self.cats = Group()
+        for cat_number in range(self.stats.cats_left):
+            cat = Cat(self.mg_game)
+            cat.rect.x = 10 + cat_number * cat.rect.width
+            cat.rect.y = 10
+            self.cats.add(cat)
+
 
     def show_score(self):
         self.screen.blit(self.score_image, self.score_rect)
         self.screen.blit(self.high_score_image, self.high_score_rect)
         self.screen.blit(self.level_image, self.level_rect)
+        self.cats.draw(self.screen) 
