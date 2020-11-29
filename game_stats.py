@@ -17,3 +17,4 @@ class GameStats:
         """ Initialize the stats that can change during the game """
         self.cats_left = self.settings.cat_limit
         self.score = 0
+        self.level = 1
