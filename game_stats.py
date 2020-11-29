@@ -13,3 +13,4 @@ class GameStats:
     def reset_stats(self):
         """ Initialize the stats that can change during the game """
         self.cats_left = self.settings.cat_limit
+        self.score = 0

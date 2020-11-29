@@ -6,6 +6,7 @@ import pygame
 
 from settings import Settings
 from game_stats import GameStats
+from scoreboard import Scoreboard 
 from button import Button 
 from cat import Cat
 from cheese import Cheese 
@@ -23,8 +24,9 @@ class MouseGame:
         self.settings.screen_height = self.screen.get_rect().height 
         pygame.display.set_caption("Macka Mouse Game")
 
-        # Create an instance to store game statistics
+        # Create an instance to store game statistics and create the scoreboard
         self.stats = GameStats(self)
+        self.sb = Scoreboard(self)
 
         self.cat = Cat(self)
         self.cheeses = pygame.sprite.Group() 
@@ -221,6 +223,9 @@ class MouseGame:
         for cheese in self.cheeses.sprites():
             cheese.blt_cheese()
         self.mice.draw(self.screen)
+
+        # Draw the score information
+        self.sb.show_score()
 
         # Draw the play button if the game is inactive
         if not self.stats.game_active:
