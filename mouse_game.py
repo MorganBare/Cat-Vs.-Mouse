@@ -160,6 +160,7 @@ class MouseGame:
             for mice in collisions.values():
                 self.stats.score += self.settings.mice_points * len(mice)
             self.sb.prep_score()
+            self.sb.check_high_score()
 
         if not self.mice:
             # Destroy existing cheese and create new pack
