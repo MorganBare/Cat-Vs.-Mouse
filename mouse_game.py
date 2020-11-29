@@ -93,6 +93,7 @@ class MouseGame:
             self.settings.initialize_dynamic_settings()
             self.stats.reset_stats()
             self.stats.game_active = True
+            self.sb.prep_score()
 
             # Hide the mouse cursor
             pygame.mouse.set_visible(False) 
@@ -154,6 +155,11 @@ class MouseGame:
     def _check_cheese_mouse_collisions(self):
         #Check for any cheese that has hit mice and get rid of the mice
         collisions = pygame.sprite.groupcollide( self.cheeses, self.mice, True, True)
+
+        if collisions:
+            for mice in collisions.values():
+                self.stats.score += self.settings.mice_points * len(mice)
+            self.sb.prep_score()
 
         if not self.mice:
             # Destroy existing cheese and create new pack

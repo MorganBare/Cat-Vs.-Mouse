@@ -22,6 +22,12 @@ class Settings:
         # How quickly the game speeds up
         self.speedup_scale = 1.1
 
+        # How quickly the mouse point values increase
+        self.score_scale = 1.5
+
+        # scoring
+        self.mice_points = 50
+
         self.initialize_dynamic_settings()
 
     def initialize_dynamic_settings(self):
@@ -34,8 +40,10 @@ class Settings:
         self.mouse_direction = 1
 
     def increase_speed(self):
-        # increase speed settings
+        # increase speed and point settings
         self.cat_speed *= self.speedup_scale
         self.cheese_speed *= self.speedup_scale
         self.mouse_speed *= self.speedup_scale
+
+        self.mice_points = int(self.mice_points * self.score_scale) 
        
