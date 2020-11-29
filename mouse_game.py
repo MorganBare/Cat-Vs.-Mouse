@@ -6,6 +6,7 @@ import pygame
 
 from settings import Settings
 from game_stats import GameStats
+from button import Button 
 from cat import Cat
 from cheese import Cheese 
 from mouse import Mouse
@@ -31,13 +32,18 @@ class MouseGame:
 
         self._create_pack()
 
+        # Make the play button
+        self.play_button = Button(self, "Play")
+
     def run_game(self):
         """Start the main loop for the game"""
         while True:
             self._check_events()
-            self.cat.update()
-            self._update_cheese()
-            self._update_mouse()
+            
+            if self.stats.game_active:
+                self.cat.update()
+                self._update_cheese()
+                self._update_mouse()
             self._update_screen()
 
     def _check_events(self):
@@ -143,19 +149,22 @@ class MouseGame:
 
     def _cat_hit(self):
         """ Respond to the cat being hit by the mouse """
-        # Decrement cats left
-        self.stats.cats_left -= 1
+        if self.stats.cats_left > 0:
+            # Decrement cats left
+            self.stats.cats_left -= 1
 
-        # Get rid of any remaining mice and cheese
-        self.mice.empty()
-        self.cheeses.empty()
+            # Get rid of any remaining mice and cheese
+            self.mice.empty()
+            self.cheeses.empty()
 
-        # Create new pack and center cat
-        self._create_pack()
-        self.cat.center_cat()
+            # Create new pack and center cat
+            self._create_pack()
+            self.cat.center_cat()
 
-        # Pause
-        sleep(0.5)            
+            # Pause
+            sleep(0.5)     
+        else:
+            self.stats.game_active = False       
 
     def _check_pack_edges(self):
         """Respond if any mice touch the edges"""
@@ -187,6 +196,11 @@ class MouseGame:
         for cheese in self.cheeses.sprites():
             cheese.blt_cheese()
         self.mice.draw(self.screen)
+
+        # Draw the play button if the game is inactive
+        if not self.stats.game_active:
+            self.play_button.draw_button()
+
         # Make the most recently drawn screen visible
         pygame.display.flip()
 
