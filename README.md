@@ -6,7 +6,7 @@ A shooting video game based on Space Invaders but with cats and mice.
 
 Install Python 3.x from [here](https://www.python.org/)
 
-Install pipenv
+Install [pip](https://pypi.org/project/pip/)
 
 Install PyGame 1.9.x from [here](https://www.pygame.org/news)
 
