@@ -19,6 +19,7 @@ or download as zip and extract.
 In the root directory run
 
 $ pip install
+
 $ pip python mouse_game.py
 
 ## How to play
