@@ -11,14 +11,14 @@ class Mouse(Sprite):
         self.settings = mg_game.settings
 
         # Load the mouse image and set its rect attribute
-        self.image = pygame.image.load('mouse_game/image/mouse.png')
+        self.image = pygame.image.load('image/mouse.png')
         self.rect = self.image.get_rect()
 
         # Start each new mouse near the top left of the screen
         self.rect.x = self.rect.width
         self.rect.y = self.rect.height
 
-        # Stoe the mouse's exact horizontal position
+        # Store the mouse's exact horizontal position
         self.x = float(self.rect.x)
 
     def check_edges(self):

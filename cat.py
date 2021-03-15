@@ -11,7 +11,7 @@ class Cat(Sprite):
         self.screen_rect = mg_game.screen.get_rect()
 
         # Load cat image and get it's rect
-        self.image = pygame.image.load('mouse_game/image/cat1.png')
+        self.image = pygame.image.load('cat1.png')
         self.rect = self.image.get_rect()
 
         # Start each cat at the bottom center of the screen
