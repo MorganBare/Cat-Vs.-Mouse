@@ -18,7 +18,8 @@ or download as zip and extract.
 
 In the root directory run
 
-$ pip python mouse_game.py
+$ pipenv install
+$ pipenv run python mouse_game.py
 
 ## How to play
 
