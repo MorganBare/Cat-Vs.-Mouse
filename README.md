@@ -2,6 +2,8 @@
 
 A shooting video game based on Space Invaders but with cats and mice.
 
+![Alt Text](image/final_610c4535c8dedf006aa96c6c_626114.gif)
+
 ## How-to 
 
 Install Python 3.x from [here](https://www.python.org/)
